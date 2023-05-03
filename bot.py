@@ -1,6 +1,4 @@
 
-
-
 import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from transformers import pipeline
@@ -10,9 +8,6 @@ bot = telegram.Bot(token='5944753434:AAFVSXlqguHeo6fFWb8pNzIf8NZaGkJKWQA')
 updater = Updater(
     token='5944753434:AAFVSXlqguHeo6fFWb8pNzIf8NZaGkJKWQA', use_context=True)
 dispatcher = updater.dispatcher
-
-# Define a function for handling the /start command
-
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id,
