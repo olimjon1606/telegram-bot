@@ -47,7 +47,6 @@ def get_weather(city, open_weather_token):
               f"Have Great Day!!!")
 
 
-
     except Exception as ex:
         print(ex)
         print("Please check city name!")
