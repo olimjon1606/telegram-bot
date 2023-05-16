@@ -22,12 +22,7 @@ def get_weather(city, open_weather_token):
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={open_weather_token}&units=metric"
         )
         data = r.json()
-        # pprint(data)
-        # p = requests.get(
-        #     f"https://source.unsplash.com/1600x900/?nature,rain"
-        # )
-        # dataPic = p.json()
-        # pprint(dataPic)
+     
 
         city = data["name"]
         cur_weather = data["main"]["temp"]
