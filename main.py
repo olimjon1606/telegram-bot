@@ -41,7 +41,6 @@ def get_weather(city, open_weather_token):
               f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nLength of the Day: {length_of_the_day}\n"
               f"Have Great Day!!!")
 
-
     except Exception as ex:
         print(ex)
         print("Please check city name!")
