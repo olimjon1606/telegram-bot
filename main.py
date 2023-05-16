@@ -22,7 +22,12 @@ def get_weather(city, open_weather_token):
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={open_weather_token}&units=metric"
         )
         data = r.json()
-        pprint(data)
+        # pprint(data)
+        # p = requests.get(
+        #     f"https://source.unsplash.com/1600x900/?nature,rain"
+        # )
+        # dataPic = p.json()
+        # pprint(dataPic)
 
         city = data["name"]
         cur_weather = data["main"]["temp"]
@@ -39,7 +44,8 @@ def get_weather(city, open_weather_token):
         sunset_timestamp = datetime.datetime.fromtimestamp(data["sys"]["sunset"])
         length_of_the_day = datetime.datetime.fromtimestamp(data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(data["sys"]["sunrise"])
 
-        print(f"********* {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}  ********\n"
+        print(f"https://source.unsplash.com/1600x900/?nature,rain"
+              f"********* {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}  ********\n"
               f"Weather in City: {city}\nTemperature: {cur_weather}°C {wd}\n"
               f"Humidity: {humidity}\nPressure: {pressure}\nWind: {wind} m/s\n"
               f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nLength of the Day: {length_of_the_day}\n"

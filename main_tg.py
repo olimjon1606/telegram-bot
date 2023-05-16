@@ -1,5 +1,6 @@
 import requests
 import datetime
+import random
 from config import open_weather_token, tg_bot_token
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
@@ -47,13 +48,23 @@ async def get_weather(message: types.Message):
         length_of_the_day = datetime.datetime.fromtimestamp(data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
             data["sys"]["sunrise"])
 
-        await message.reply(f"********* {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}  ********\n"
-              f"Weather in City:  {city}\nTemperature: {cur_weather}°C {wd}\n"
-              f"Humidity: {humidity}\nPressure: {pressure}\nWind: {wind} m/s\n"
-              f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nLength of the Day: {length_of_the_day}\n"
-              f"Have Great Day!!!")
+        random_number = random.randint(1, 9999)
 
+        # Construct the photo URL with the dynamic argument
+        photo_url = f'https://source.unsplash.com/400x400/?{city},{wd}?random={random_number}'
 
+        # Caption text
+        caption_text = (f"Weather in City:  {city}\nTemperature: {cur_weather}°C {wd}\n"
+                        f"Humidity: {humidity}\nPressure: {pressure}\nWind: {wind} m/s\n"
+                        f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nLength of the Day: {length_of_the_day}\n"
+                        f"Have Great Day!!!")
+
+        # Send photo with caption
+        await bot.send_photo(
+            chat_id=message.chat.id,
+            photo=photo_url,
+            caption=caption_text
+        )
 
     except:
         await message.reply("\U00002620 Please check city name! \U00002620")
@@ -63,3 +74,5 @@ async def get_weather(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp)
+
+    # f"********* {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}  ********\n"
