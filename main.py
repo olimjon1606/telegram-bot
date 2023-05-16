@@ -45,9 +45,9 @@ def get_weather(city, open_weather_token):
         print(ex)
         print("Please check city name!")
 
-# def main():
-#     city = input("Enter City: ")
-#     get_weather(city, open_weather_token)
+def main():
+    city = input("Enter City: ")
+    get_weather(city, open_weather_token)
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
