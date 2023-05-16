@@ -1,13 +1,22 @@
 import requests
 import datetime
-from pprint import pprint
-from config import open_weather_token
+from config import open_weather_token, tg_bot_token
+from aiogram import Bot, types
+from aiogram.dispatcher import Dispatcher
+from aiogram.utils import executor
 
-def get_weather(city, open_weather_token):
+bot = Bot(token = tg_bot_token)
+dp = Dispatcher(bot)
 
+@dp.message_handler(commands=["start"])
+async def start_command(message: types.Message):
+    await message.reply("Enter City name: ")
+
+@dp.message_handler()
+async def get_weather(message: types.Message):
     code_to_smile = {
         "Clear": "Clear \U00002600",
-        "Clouds": "Clouds \U00002601",
+        "Clouds": "Cloudy \U00002601",
         "Rain": "Rain \U00002614",
         "Drizzle": "Drizzle \U00002614",
         "Thunderstorm": "Thunderstorm \U000026A1",
@@ -16,13 +25,11 @@ def get_weather(city, open_weather_token):
 
     }
 
-
     try:
         r = requests.get(
-            f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={open_weather_token}&units=metric"
+            f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={open_weather_token}&units=metric"
         )
         data = r.json()
-        pprint(data)
 
         city = data["name"]
         cur_weather = data["main"]["temp"]
@@ -37,23 +44,22 @@ def get_weather(city, open_weather_token):
         wind = data["wind"]["speed"]
         sunrise_timestamp = datetime.datetime.fromtimestamp(data["sys"]["sunrise"])
         sunset_timestamp = datetime.datetime.fromtimestamp(data["sys"]["sunset"])
-        length_of_the_day = datetime.datetime.fromtimestamp(data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(data["sys"]["sunrise"])
+        length_of_the_day = datetime.datetime.fromtimestamp(data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
+            data["sys"]["sunrise"])
 
-        print(f"********* {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}  ********\n"
-              f"Weather in City: {city}\nTemperature: {cur_weather}°C {wd}\n"
+        await message.reply(f"********* {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}  ********\n"
+              f"Weather in City:  {city}\nTemperature: {cur_weather}°C {wd}\n"
               f"Humidity: {humidity}\nPressure: {pressure}\nWind: {wind} m/s\n"
               f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nLength of the Day: {length_of_the_day}\n"
               f"Have Great Day!!!")
 
 
 
-    except Exception as ex:
-        print(ex)
-        print("Please check city name!")
+    except:
+        await message.reply("\U00002620 Please check city name! \U00002620")
 
-def main():
-    city = input("Enter City: ")
-    get_weather(city, open_weather_token)
+
+
 
 if __name__ == '__main__':
-    main()
+    executor.start_polling(dp)
