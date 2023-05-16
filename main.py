@@ -12,16 +12,13 @@ def get_weather(city, open_weather_token):
         "Thunderstorm": "Thunderstorm \U000026A1",
         "Snow": "Snow \U0001F328",
         "Mist": "Mist \U0001F32B"
-
     }
-
 
     try:
         r = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={open_weather_token}&units=metric"
         )
         data = r.json()
-     
 
         city = data["name"]
         cur_weather = data["main"]["temp"]
