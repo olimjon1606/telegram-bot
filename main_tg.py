@@ -51,7 +51,7 @@ async def get_weather(message: types.Message):
         random_number = random.randint(1, 9999)
 
         # Construct the photo URL with the dynamic argument
-        photo_url = f'https://source.unsplash.com/400x400/?{city},{wd}?random={random_number}'
+        photo_url = f'https://source.unsplash.com/500x400/?{city},{wd}?random={random_number}'
 
         # Caption text
         caption_text = (f"Weather in City:  {city}\nTemperature: {cur_weather}°C {wd}\n"
