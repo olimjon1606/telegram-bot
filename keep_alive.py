@@ -6,7 +6,6 @@ def index():
     # Call your function here to retrieve the desired text
     text = get_text()
 
-    # Pass the text to the template and render it
     return render_template('index.html', text=text)
 
 def get_text():
