@@ -56,7 +56,6 @@ async def get_weather(message: types.Message):
 
     photo_url = f'https://source.unsplash.com/500x400/?{city},{wd}?random={random_number}'
 
-    # Caption text
     caption_text = (
       f"Weather in City:  {city}\nTemperature: {cur_weather}°C {wd}\n"
       f"Humidity: {humidity}\nPressure: {pressure}\nWind: {wind} m/s\n"
