@@ -10,7 +10,6 @@ def index():
     return render_template('index.html', text=text)
 
 def get_text():
-    # Your logic to retrieve the text goes here
     return "Hello, world!"
 
 def keep_alive():
