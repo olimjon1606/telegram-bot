@@ -3,7 +3,6 @@ from threading import Thread
 
 @app.route('/')
 def index():
-    # Call your function here to retrieve the desired text
     text = get_text()
 
     return render_template('index.html', text=text)
