@@ -4,7 +4,6 @@ from threading import Thread
 @app.route('/')
 def index():
     text = get_text()
-
     return render_template('index.html', text=text)
 def get_text():
     return "Hello, world!"
