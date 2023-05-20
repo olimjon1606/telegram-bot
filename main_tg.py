@@ -16,7 +16,6 @@ keep_alive()
 async def start_command(message: types.Message):
   await message.reply("Enter City name: ")
 
-
 @dp.message_handler()
 async def get_weather(message: types.Message):
   code_to_smile = {
