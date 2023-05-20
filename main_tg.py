@@ -62,7 +62,6 @@ async def get_weather(message: types.Message):
       f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nLength of the Day: {length_of_the_day}\n"
       f"Have Great Day!!!")
 
-    # Send photo with caption
     await bot.send_photo(chat_id=message.chat.id,
                          photo=photo_url,
                          caption=caption_text)
