@@ -11,7 +11,6 @@ bot = Bot(token=tg_bot_token)
 dp = Dispatcher(bot)
 keep_alive()
 
-
 @dp.message_handler(commands=["start"])
 async def start_command(message: types.Message):
   await message.reply("Enter City name: ")
